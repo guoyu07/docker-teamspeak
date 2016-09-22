@@ -1,0 +1,13 @@
+[Unit]
+Description=ts3-server container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run -p 9987:9987/udp -p 10011:10011 -p 30033:30033 -v /opt/docker/teamspeak/injects:/opt/teamspeak_injects -v /opt/docker/teamspeak/logs:/teamspeak/logs -v /opt/docker/teamspeak/files:/teamspeak/files --name teamspeak-container docker-teamspeak
+ExecStop=/usr/bin/docker stop teamspeak-container
+ExecStopPost=/usr/bin/docker rm teamspeak-container
+
+[Install]
+WantedBy=local.target
