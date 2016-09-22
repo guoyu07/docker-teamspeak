@@ -1,0 +1,25 @@
+# only for development purposes!!!
+teamspeak:
+  image: docker-teamspeak:dev
+  links:
+    - 'mysql:mysql'
+  ports:
+    - '9987:9987/udp'
+  environment:
+    MYSQL_HOST: 'mysql'
+    MYSQL_PORT: '3306'
+    MYSQL_DB: 'teamspeak'
+    MYSQL_USER: 'teamspeak'
+    MYSQL_PASS: 'teamspeak'
+
+mysql:
+  image: mysql
+  ports:
+    - '3306:3306'
+  expose:
+    - '3306'
+  environment:
+    MYSQL_DATABASE: 'teamspeak'
+    MYSQL_USER: 'teamspeak'
+    MYSQL_PASSWORD: 'teamspeak'
+    MYSQL_ROOT_PASSWORD: 'teamspeak'
