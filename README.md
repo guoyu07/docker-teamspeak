@@ -1,19 +1,15 @@
 # docker-teamspeak
-docker implementation of TeamSpeak3
 
-This container will only work with an existing database-server (MariaDB) as it does not provide its own.
+docker teamspeak server container
 
-It took me a while to figure out, why it always crashed after 20 minutes, but I just forgot to copy something from redist folder.
+## build the image:
+go to checkout-folder
 
-You could use the following command to start the container:
-```
-docker run \
-  -p 9987:9987/udp \
-  -p 10011:10011 \
-  -p 30033:30033 \
-  -v /opt/docker/teamspeak/injects:/opt/teamspeak_injects \
-  -v /opt/docker/teamspeak/logs:/teamspeak/logs \
-  -v /opt/docker/teamspeak/files:/teamspeak/files \
-  --name teamspeak-container \
-  docker-teamspeak
-```
+`cd docker-teamspeak`
+
+`docker build -t teamspeak:3.0.13.3 .`
+
+* move the service file to `/etc/systemd/system`
+* `systemctl daemon-reload`
+* make dir in `/opt/docker/teamspeak`
+* `systemctl start teamspeak`
